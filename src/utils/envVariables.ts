@@ -1,0 +1,1 @@
+export const BASE_URL_APP = import.meta.env.VITE_BASE_APP_URL;
