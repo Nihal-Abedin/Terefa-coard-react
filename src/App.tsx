@@ -5,13 +5,21 @@ import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
 import Login from "./components/Authentication/Login/Login";
 import Signup from "./components/Authentication/SignUp/SignUp";
+import Layout from "./components/Layout/Layout";
+import ProtectedRoutesOnLogin from "./components/ProtectedRoutesWrapper/ProtectedRoutesOnLogin";
 
 function App() {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
+        <Route element={<ProtectedRoutesOnLogin />}>
+          <Route path="/" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+        </Route>
+        {/* <Route element={<Layout />}>
+          <Route path="/tasks" element={<Layout />} />
+        </Route> */}
+        <Route path="/tasks" element={<Layout />} />
       </Routes>
       <ToastContainer
         position="bottom-left"

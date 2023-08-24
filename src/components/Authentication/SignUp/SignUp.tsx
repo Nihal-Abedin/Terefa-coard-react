@@ -16,6 +16,7 @@ const Signup = () => {
       onSuccess: (data) => {
         localStorage.setItem("TERAFE_TOKEN", data.token);
         toast(data?.message);
+        navigate("/tasks", { replace: true });
       },
       onError: (err) => {
         console.log(err.message);
