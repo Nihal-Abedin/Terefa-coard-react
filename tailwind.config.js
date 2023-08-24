@@ -4,7 +4,11 @@ import plugins from "./postcss.config";
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        default: "url(./assets/background.jpg)",
+      },
+    },
   },
   plugins: [plugins],
 };
