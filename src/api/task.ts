@@ -8,3 +8,6 @@ export const getTasks = async () => {
 export const updateTask = async (id: string, taskUpdataData: { name: string }) => {
     return request({ url: `${BASE_URL_APP}/task/${id}`, method: 'patch', data: taskUpdataData })
 }
+export const createTask = async (taskData: { name: string }) => {
+    return request({ url: `${BASE_URL_APP}/task/`, method: 'post', data: taskData })
+}

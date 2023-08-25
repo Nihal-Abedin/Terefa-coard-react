@@ -9,7 +9,7 @@ const TaskBoard = () => {
   return (
     <Board>
       <Board.Header />
-      <Board.Body tasks={data} />
+      <Board.Body tasks={data?.data} />
     </Board>
   );
 };

@@ -1,0 +1,17 @@
+.medium {
+    background: var(--color-yellow-700);
+    padding: 0.1rem 0.7rem;
+    border-radius: var(--border-radius-md);
+}
+
+.high {
+    background: var(--color-red-700);
+    padding: 0.1rem 0.7rem;
+    border-radius: var(--border-radius-md);
+}
+
+.low {
+    background: var(--color-blue-700);
+    padding: 0.1rem 0.7rem;
+    border-radius: var(--border-radius-md);
+}

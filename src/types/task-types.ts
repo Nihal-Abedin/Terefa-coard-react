@@ -1,10 +1,9 @@
 export interface TaskTypes {
-    data: [{
-        name: string;
-        id: string;
-        createdBy: string;
-        cards: Cards[]
-    }]
+    name: string;
+    id: string;
+    createdBy: string;
+    cards: Cards[];
+    data: TaskTypes[]
 }
 export interface TaskDataTypes {
     name: string;
@@ -18,4 +17,11 @@ export interface Cards {
     priority: 'high' | "medium" | "low";
     taskOf: string;
     _id: string;
+    endDate: string;
+}
+
+export interface CardPayload {
+    name: string;
+    endDate?: string;
+    taskOf?: string;
 }
