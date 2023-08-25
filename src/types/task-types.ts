@@ -24,4 +24,5 @@ export interface CardPayload {
     name: string;
     endDate?: string;
     taskOf?: string;
+    priority?: string;
 }

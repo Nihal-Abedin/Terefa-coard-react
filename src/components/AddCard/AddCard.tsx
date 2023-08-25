@@ -1,4 +1,4 @@
-import { DatePicker, Input } from "antd";
+import { DatePicker, Input, Select } from "antd";
 import dayjs from "dayjs";
 
 import React, { useState } from "react";
@@ -6,28 +6,57 @@ import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
 import { useQueryClient } from "@tanstack/react-query";
 import { useCreateCard } from "../../query/mutations/card";
 import { taskQueryKeys } from "../../query/queryKeys";
+import type { SelectProps } from "antd";
+import { toast } from "react-toastify";
+import { CardPayload } from "../../types/task-types";
 // const dateFormat = "DD-MM-YYYY";
 
 interface AddCardProps {
   taskId: string;
 }
+const priorityOptions: SelectProps["options"] = [
+  {
+    label: "Low",
+    value: "low",
+  },
+  {
+    label: "Medium",
+    value: "medium",
+  },
+  {
+    label: "High",
+    value: "high",
+  },
+];
 const AddCard: React.FC<AddCardProps> = ({ taskId }) => {
   const queryClient = useQueryClient();
   const { mutate } = useCreateCard();
   const [toCreate, setToCreate] = useState(false);
   const [cardname, setCardName] = useState("");
+  const [cardPriotity, setPriority] = useState("");
   const [cardDate, setCardDate] = useState(`${new Date()}`);
 
   const handleCreate = () => {
-    mutate(
-      { name: cardname, endDate: cardDate, taskOf: taskId },
-      {
-        onSuccess: () => {
-          setToCreate(false);
-          queryClient.invalidateQueries({ queryKey: taskQueryKeys.lists() });
-        },
-      }
-    );
+    if (cardname.trim().length === 0) {
+      return toast.warning("Please provide a name for the card.");
+    }
+    const cardMutateData: CardPayload = {
+      name: cardname,
+      endDate: cardDate,
+      taskOf: taskId,
+    };
+    if (cardPriotity) cardMutateData.priority = cardPriotity;
+    mutate(cardMutateData, {
+      onSuccess: (data) => {
+        console.log(data);
+        setToCreate(false);
+        // queryClient.setQueriesData{}
+        queryClient.invalidateQueries({ queryKey: taskQueryKeys.lists() });
+      },
+    });
+  };
+  const handleSelectChange = (value: string) => {
+    setPriority(value);
   };
   return (
     <div className="bg-black  h-fit text-sm text-[var(--color-grey-300)] p-2 min-w-[17rem] max-h-full rounded-lg ">
@@ -51,10 +80,18 @@ const AddCard: React.FC<AddCardProps> = ({ taskId }) => {
             placeholder="Expire Date"
             size="small"
             showToday
+            className="text-sm mb-2"
             defaultValue={dayjs()}
             onChange={(_date, dateString) => {
               setCardDate(dateString);
             }}
+          />
+          <Select
+            size="small"
+            className="text-left"
+            placeholder="Priority"
+            options={priorityOptions}
+            onChange={handleSelectChange}
           />
           <div className="w-full flex justify-end gap-1 mt-2">
             <div
