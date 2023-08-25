@@ -8,6 +8,7 @@ import Signup from "./components/Authentication/SignUp/SignUp";
 import Layout from "./components/Layout/Layout";
 import ProtectedRoutesOnLogin from "./components/ProtectedRoutesWrapper/ProtectedRoutesOnLogin";
 import TaskBoard from "./components/TaskBoard/TaskBoard";
+import AuthorizationgRoutes from "./components/ProtectedRoutesWrapper/AuthorizationgRoutes";
 
 function App() {
   return (
@@ -17,7 +18,13 @@ function App() {
           <Route path="/" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
         </Route>
-        <Route element={<Layout />}>
+        <Route
+          element={
+            <AuthorizationgRoutes>
+              <Layout />
+            </AuthorizationgRoutes>
+          }
+        >
           <Route path="/taskboard" element={<TaskBoard />} />
         </Route>
       </Routes>

@@ -1,7 +1,7 @@
 
-export const sharedWithMeQueryKeys = {
-    all: ["sharedWithMe"] as const,
-    lists: () => [...sharedWithMeQueryKeys.all, "sharedLists"] as const,
+export const taskQueryKeys = {
+    all: ["tasks"] as const,
+    lists: () => [...taskQueryKeys.all, "taskLists"] as const,
     list: (searchTxt: string) =>
-        [...sharedWithMeQueryKeys.lists(), { searchTxt }] as const,
+        [...taskQueryKeys.lists(), { searchTxt }] as const,
 };

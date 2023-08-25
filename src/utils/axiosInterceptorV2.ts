@@ -6,15 +6,28 @@ export interface ErrorResponseAxios {
     error: ErrorResponseCustom
 
 }
+// export interface RequestOptions<T> {
+//     url: string;
+//     method: string;
+//     data: RequestOptions<T>
+// }
 const client = axios.create({
     baseURL: BASE_URL_APP, // Set your API base URL
-    headers: { "Content-Type": "application/json" }
+    headers: { "Content-Type": "application/json" },
 })
-const token = localStorage.getItem("TERAFE_TOKEN") || ''
+
 export const request = ({ ...options }) => {
+    const token = localStorage.getItem("TERAFE_TOKEN");
     client.defaults.headers.common.Authorization = `Bearer ${token}`;
     const onSuccess = (res: AxiosResponse) => res.data;
     const onError = (err: AxiosError<ErrorResponseAxios>) => {
+        console.log(err)
+        if (err.response?.data.message.includes("jwt expired")) {
+            localStorage.removeItem("TERAFE_TOKEN");
+            return Promise.reject({
+                message: "Please Login to get access",
+            })
+        }
         if (err.response?.status === 401) {
             console.log(err)
             return Promise.reject({

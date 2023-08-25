@@ -4,7 +4,7 @@ const ProtectedRoutesOnLogin = () => {
   const location = useLocation();
 
   if (localStorage.getItem("TERAFE_TOKEN")) {
-    return <Navigate to="/tasks" state={{ from: location }} />;
+    return <Navigate to="/taskboard" state={{ from: location }} />;
   }
 
   return <Outlet />;

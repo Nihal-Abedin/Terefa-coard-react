@@ -6,11 +6,10 @@ import { useLogin } from "../../../query/mutations/auth";
 import { toast } from "react-toastify";
 const Login = () => {
   const navigate = useNavigate();
-  const { mutate, isLoading } = useLogin();
+  const { mutateAsync, isLoading } = useLogin();
   const onFinish = (values: LoginFormTypes) => {
-    mutate(values, {
+    mutateAsync(values, {
       onSuccess: (data) => {
-        console.log(data);
         localStorage.setItem("TERAFE_TOKEN", data.token);
         toast(data?.message);
         navigate("/taskboard", { replace: true });
