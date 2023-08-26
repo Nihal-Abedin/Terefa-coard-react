@@ -11,3 +11,8 @@ export const updateTask = async (id: string, taskUpdataData: { name: string }) =
 export const createTask = async (taskData: { name: string }) => {
     return request({ url: `${BASE_URL_APP}/task/`, method: 'post', data: taskData })
 }
+
+export const deleteTask = async (id: string) => {
+    return request({ url: `${BASE_URL_APP}/task/${id}`, method: 'delete' })
+
+}

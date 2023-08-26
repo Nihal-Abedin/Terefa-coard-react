@@ -7,9 +7,9 @@ const TaskBoard = () => {
   console.log(data, isLoading, error, isError);
 
   return (
-    <Board>
+    <Board tasks={data?.data}>
       <Board.Header />
-      <Board.Body tasks={data?.data} />
+      <Board.Body />
     </Board>
   );
 };
