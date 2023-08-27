@@ -22,7 +22,7 @@ export const request = ({ ...options }) => {
     const onSuccess = (res: AxiosResponse) => res.data;
     const onError = (err: AxiosError<ErrorResponseAxios>) => {
 
-        if (err.response?.data.message.includes("jwt expired") || err.response?.data.message.includes("jwt malformed")) {
+        if (err.response?.data.message?.includes("jwt expired") || err.response?.data.message?.includes("jwt malformed")) {
             localStorage.removeItem("TERAFE_TOKEN");
             // window.location.replace('/')
             return Promise.reject({

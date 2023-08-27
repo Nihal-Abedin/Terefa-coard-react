@@ -5,6 +5,8 @@ import { Cards } from "../../types/task-types";
 import moment from "moment";
 import styles from "./task.module.css";
 import { isInThePast, isToday } from "../../utils/dateParser";
+import { useDrag } from "react-dnd";
+import { ItemTypes } from "../../drag-item-types/dragItemTypes";
 
 interface TaskCardProps {
   card: Cards;
@@ -12,18 +14,23 @@ interface TaskCardProps {
 // const dateFormat = "DD-MM-YYYY";
 
 const TaskCard: React.FC<TaskCardProps> = ({ card }) => {
-  const handleDragStart = (e: React.DragEvent) => {
-    console.log(e);
-  };
-  const isExpiringToday =
-    new Date().getTime() > new Date(card.endDate).getTime();
-  console.log(isToday(new Date(card.endDate), new Date()), "IS TODAY");
+  const isExpiringToday = isToday(new Date(card.endDate), new Date());
   const isExpired = isInThePast(new Date(card.endDate));
+  const [{ isDragging }, drag] = useDrag(() => ({
+    type: ItemTypes.CARD,
+    item: { card },
+    collect: (monitor) => ({
+      isDragging: !!monitor.isDragging(),
+    }),
+  }));
   return (
     <div
-      draggable
-      onDragStart={handleDragStart}
-      className=" drag break-words max-w-[17rem] cursor-move bg-[--color-grey-500-op-2] p-2 rounded-lg mr-1 relative"
+      ref={drag}
+      style={{
+        opacity: isDragging ? 0.5 : 1,
+        // position: isDragging ? "absolute" : "relative",
+      }}
+      className={` drag break-words max-w-[17rem] cursor-grab bg-[--color-grey-500-op-2] p-2 rounded-lg mr-1 relative`}
     >
       <p className="mb-2 ">
         {card.name}
