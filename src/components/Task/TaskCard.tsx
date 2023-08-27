@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FieldTimeOutlined, EyeOutlined } from "@ant-design/icons";
 
 import { Cards } from "../../types/task-types";
@@ -12,30 +12,31 @@ interface TaskCardProps {
 // const dateFormat = "DD-MM-YYYY";
 
 const TaskCard: React.FC<TaskCardProps> = ({ card }) => {
+  const [isDragging, setIsDragging] = useState(false);
+  const isExpiringToday = isToday(new Date(card.endDate), new Date());
+  const isExpired = isInThePast(new Date(card.endDate));
   const handleDragStart = (e: React.DragEvent) => {
     console.log(e);
     console.log("START");
+    setIsDragging(true);
     e.dataTransfer.setData("card-item", card._id);
 
-    // const image: JSX.Element = <>HI</>; // <== whatever you want here
-    // const target = e.currentTarget as HTMLElement;
-    // const ghost = document.createElement(target);
-    // target.style.transform = "translate(-10000px, -10000px)";
-    // ghost.style.position = "absolute";
-    // document.body.appendChild(ghost);
-    // if (target) e.dataTransfer.setDragImage(target, 0, 0);
-    // e.dataTransfer.dropEffect
-
-    // ReactDOM.createPortal(image, ghost);
+    const ghost = document.createElement("div");
+    e.dataTransfer.setDragImage(ghost, 0, 0);
   };
-  const isExpiringToday =
-    new Date().getTime() > new Date(card.endDate).getTime();
-  console.log(isToday(new Date(card.endDate), new Date()), "IS TODAY");
-  const isExpired = isInThePast(new Date(card.endDate));
+  const handleDragEnd = () => {
+    console.log("Leave");
+    setIsDragging(false);
+  };
+
   return (
     <div
       draggable
       onDragStart={handleDragStart}
+      onDragEnd={handleDragEnd}
+      style={{
+        opacity: isDragging ? "0.5" : "1",
+      }}
       className=" drag break-words max-w-[17rem] cursor-grab bg-[--color-grey-500-op-2] p-2 rounded-lg mr-1 relative"
     >
       <p className="mb-2 ">

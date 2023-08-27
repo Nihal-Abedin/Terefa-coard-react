@@ -26,3 +26,7 @@ export interface CardPayload {
     taskOf?: string;
     priority?: string;
 }
+export interface CardMovePayload {
+    taskOf: string;
+    cardId: string
+}
