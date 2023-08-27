@@ -20,7 +20,7 @@ const AddTask = () => {
     });
   };
   return (
-    <div className="bg-black  h-fit text-sm text-[var(--color-grey-300)] p-2 min-w-[17rem] max-h-full rounded-lg ">
+    <div className="bg-[var(--color-grey-500-op-1)]  h-fit text-sm text-white p-2 min-w-[17rem] max-h-full rounded-lg ">
       {!toCreate ? (
         <div
           onClick={() => setToCreate((prev) => !prev)}
