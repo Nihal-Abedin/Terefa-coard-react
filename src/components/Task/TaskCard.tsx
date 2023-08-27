@@ -14,6 +14,19 @@ interface TaskCardProps {
 const TaskCard: React.FC<TaskCardProps> = ({ card }) => {
   const handleDragStart = (e: React.DragEvent) => {
     console.log(e);
+    console.log("START");
+    e.dataTransfer.setData("card-item", card._id);
+
+    // const image: JSX.Element = <>HI</>; // <== whatever you want here
+    // const target = e.currentTarget as HTMLElement;
+    // const ghost = document.createElement(target);
+    // target.style.transform = "translate(-10000px, -10000px)";
+    // ghost.style.position = "absolute";
+    // document.body.appendChild(ghost);
+    // if (target) e.dataTransfer.setDragImage(target, 0, 0);
+    // e.dataTransfer.dropEffect
+
+    // ReactDOM.createPortal(image, ghost);
   };
   const isExpiringToday =
     new Date().getTime() > new Date(card.endDate).getTime();
@@ -23,7 +36,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ card }) => {
     <div
       draggable
       onDragStart={handleDragStart}
-      className=" drag break-words max-w-[17rem] cursor-move bg-[--color-grey-500-op-2] p-2 rounded-lg mr-1 relative"
+      className=" drag break-words max-w-[17rem] cursor-grab bg-[--color-grey-500-op-2] p-2 rounded-lg mr-1 relative"
     >
       <p className="mb-2 ">
         {card.name}

@@ -11,8 +11,17 @@ const Task: React.FC<TaskProps> = ({ task }) => {
   //   console.log(e, "ENTER");
   // };
   // todo
-  const handleDropEvent = (e: React.DragEvent) => {
-    console.log(e, "DROP");
+  const handleDropLeave = (e: React.DragEvent) => {
+    e.preventDefault();
+    // console.log(e);
+  };
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    const droppedItem = e.dataTransfer.getData("card-item");
+    console.log(droppedItem, task.id);
   };
   if (!task) {
     return <p>Loading...</p>;
@@ -22,7 +31,9 @@ const Task: React.FC<TaskProps> = ({ task }) => {
       <TaskMenuActions task={task} />
       {/**card */}
       <div
-        onDragLeave={handleDropEvent}
+        onDragOver={handleDragOver}
+        onDragLeave={handleDropLeave}
+        onDrop={handleDrop}
         className="grid grid-cols-1 p-2 grid-flow-row auto-rows-max gap-3 text-sm mb-3  min-h-fit overflow-y-auto "
       >
         {task?.cards.map((card) => (
