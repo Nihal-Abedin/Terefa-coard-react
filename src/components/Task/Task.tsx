@@ -10,7 +10,7 @@ import { taskQueryKeys } from "../../query/queryKeys";
 interface TaskProps {
   task: TaskDataTypes;
 }
-const Task: React.FC<TaskProps> = ({ task }) => {
+const Task: React.FC<TaskProps> = React.memo(({ task }) => {
   const queryClient = useQueryClient();
   const { mutate } = useMoveCard();
   // const handleDropEnterEvent = (e: React.DragEvent) => {
@@ -27,7 +27,6 @@ const Task: React.FC<TaskProps> = ({ task }) => {
 
   const handleDrop = (e: React.DragEvent) => {
     const droppedItem = e.dataTransfer.getData("card-item");
-    console.log(droppedItem, task.id);
     mutate(
       { cardId: droppedItem, taskOf: task.id },
       {
@@ -59,6 +58,6 @@ const Task: React.FC<TaskProps> = ({ task }) => {
       <AddCard taskId={task.id} />
     </div>
   );
-};
+});
 
 export default Task;

@@ -6,28 +6,15 @@ import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
 import { useQueryClient } from "@tanstack/react-query";
 import { useCreateCard } from "../../query/mutations/card";
 import { taskQueryKeys } from "../../query/queryKeys";
-import type { SelectProps } from "antd";
 import { toast } from "react-toastify";
 import { CardPayload } from "../../types/task-types";
+import { priorityOptions } from "../../utils/select/cardSelectOptions";
 // const dateFormat = "DD-MM-YYYY";
 
 interface AddCardProps {
   taskId: string;
 }
-const priorityOptions: SelectProps["options"] = [
-  {
-    label: "Low",
-    value: "low",
-  },
-  {
-    label: "Medium",
-    value: "medium",
-  },
-  {
-    label: "High",
-    value: "high",
-  },
-];
+
 const AddCard: React.FC<AddCardProps> = ({ taskId }) => {
   const queryClient = useQueryClient();
   const { mutate } = useCreateCard();

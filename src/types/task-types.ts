@@ -18,6 +18,7 @@ export interface Cards {
     taskOf: string;
     _id: string;
     endDate: string;
+    status: string
 }
 
 export interface CardPayload {
