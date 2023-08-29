@@ -18,6 +18,7 @@ export interface Cards {
     taskOf: string;
     _id: string;
     endDate: string;
+    status: string
 }
 
 export interface CardPayload {
@@ -29,4 +30,17 @@ export interface CardPayload {
 export interface CardMovePayload {
     taskOf: string;
     cardId: string
+}
+export interface CardUpdatePayload {
+    [name: string]: string
+}
+export interface CardUpdatePayloadV2 {
+    cardId: string;
+    data?: {
+        name?: string;
+        priority?: 'high' | "medium" | "low";
+        taskOf?: string;
+        endDate?: string;
+        status?: string
+    }
 }
