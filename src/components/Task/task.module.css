@@ -20,6 +20,20 @@
     position: absolute;
 }
 
-.test {
-    /* display: none; */
+.notstarted {
+    background: var(--color-grey-700);
+    padding: 0.1rem 0.7rem;
+    border-radius: var(--border-radius-md);
+}
+
+.inprogress {
+    background: var(--color-blue-700);
+    padding: 0.1rem 0.7rem;
+    border-radius: var(--border-radius-md);
+}
+
+.done {
+    background: var(--color-green-700);
+    padding: 0.1rem 0.7rem;
+    border-radius: var(--border-radius-md);
 }

@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
-import { createCard, moveCard } from "../../api/card";
-import { CardMovePayload, CardPayload } from "../../types/task-types";
+import { createCard, moveCard, updateCard } from "../../api/card";
+import { CardMovePayload, CardPayload, CardUpdatePayloadV2 } from "../../types/task-types";
 
 export const useCreateCard = () => {
     return useMutation((data: CardPayload) => {
@@ -10,6 +10,11 @@ export const useCreateCard = () => {
 export const useMoveCard = () => {
     return useMutation((data: CardMovePayload) => {
         return moveCard(data);
+    })
+}
+export const useUpdateCard = () => {
+    return useMutation((data: CardUpdatePayloadV2) => {
+        return updateCard(data)
     })
 }
 /**
