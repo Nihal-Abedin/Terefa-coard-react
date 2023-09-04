@@ -10,6 +10,7 @@ import ProtectedRoutesOnLogin from "./components/ProtectedRoutesWrapper/Protecte
 import TaskBoard from "./components/TaskBoard/TaskBoard";
 import AuthorizationgRoutes from "./components/ProtectedRoutesWrapper/AuthorizationgRoutes";
 import ThemeProvider from "./utils/ThemeProvider";
+import Workspace from "./pages/Workspace";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             }
           >
             <Route path="/taskboard" element={<TaskBoard />} />
+            <Route path="/workspace" element={<Workspace />} />
           </Route>
         </Route>
       </Routes>

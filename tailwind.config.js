@@ -8,6 +8,8 @@ export default {
       backgroundImage: {
         default:
           "linear-gradient(rgb(0, 0, 0, 0.3), rgb(0, 0, 0, 0.3)), url('../src/assets/background.jpg')",
+        "default-1":
+          "linear-gradient(rgb(0, 0, 0, 0.9), rgb(0, 0, 0, 0.9)), url('../src/assets/background.jpg')",
       },
       transformOrigin: {
         dragable: "translate(0,0)",
