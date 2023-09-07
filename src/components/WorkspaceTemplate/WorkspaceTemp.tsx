@@ -13,7 +13,7 @@ const WorkspaceTemp: React.FC<WorspaceTempProps> & WorkspaceTempCom = ({
   children,
 }) => {
   return (
-    <div className="grid grid-cols-[1fr,2.5fr] grid-rows-1 h-full overflow-hidden">
+    <div className="grid grid-cols-[1fr,2.5fr] grid-rows-1 gap-2 h-full overflow-hidden">
       {children}
     </div>
   );
