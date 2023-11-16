@@ -6,3 +6,8 @@ export const taskQueryKeys = {
         [...taskQueryKeys.lists(), { searchTxt }] as const,
     // mutate : ()=>
 };
+
+export const cardQueryKeys = {
+    all: ["cards"] as const,
+    single: (id:string) => [id] as const,
+};

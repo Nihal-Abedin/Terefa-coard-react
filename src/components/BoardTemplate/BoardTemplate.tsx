@@ -1,7 +1,7 @@
 import { ReactNode, createContext, useState } from "react";
 import BoardHeader from "./BoardHeader";
 import BoardBody from "./BoardBody";
-import { Cards, TaskTypes } from "../../types/task-types";
+import { TaskTypes } from "../../types/task-types";
 
 interface BoardTemplate {
   Header: React.FC;
@@ -13,20 +13,20 @@ interface BoardProps {
 }
 interface InitialPropTypes {
   task: TaskTypes[] | undefined;
-  setSelectedCard: React.Dispatch<React.SetStateAction<Cards | null>>;
-  selectedCard: Cards | null;
+  setSelectedCardId: React.Dispatch<React.SetStateAction<string | null>>;
+  selectedCardId: string | null;
 }
 export const BoardTemplateContext = createContext<InitialPropTypes>({
   task: [],
-  setSelectedCard: () => null,
-  selectedCard: null,
+  setSelectedCardId: () => null,
+  selectedCardId: null,
 });
 // bg-default
 const Board: React.FC<BoardProps> & BoardTemplate = ({ children, tasks }) => {
-  const [selectedCard, setSelectedCard] = useState<Cards | null>(null);
+  const [selectedCardId, setSelectedCardId] = useState<string | null>(null);
   return (
     <BoardTemplateContext.Provider
-      value={{ task: tasks, setSelectedCard, selectedCard }}
+      value={{ task: tasks, setSelectedCardId, selectedCardId }}
     >
       <div className="py-3 px-2 grid grid-cols-1 grid-rows-[3rem,1fr] bg-default backdrop-blur  bg-cover bg-no-repeat overflow-y-hidden">
         {children}

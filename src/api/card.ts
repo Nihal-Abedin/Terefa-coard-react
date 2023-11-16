@@ -11,3 +11,9 @@ export const moveCard = async (cardData: CardMovePayload) => {
 export const updateCard = async (cardData: CardUpdatePayloadV2) => {
     return request({ url: `${BASE_URL_APP}/card/${cardData.cardId}`, method: 'patch', data: cardData.data })
 }
+export const getCard = async (cardId: string) => {
+    return request({ url: `${BASE_URL_APP}/card/${cardId}`, method: 'get' })
+}
+export const deleteCard = async (cardId: string) => {
+    return request({ url: `${BASE_URL_APP}/card/${cardId}`, method: 'delete' })
+}

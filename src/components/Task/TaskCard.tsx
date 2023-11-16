@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { FieldTimeOutlined, EyeOutlined } from "@ant-design/icons";
+import { FieldTimeOutlined } from "@ant-design/icons";
 
 import { Cards } from "../../types/task-types";
 import moment from "moment";
@@ -14,7 +14,7 @@ interface TaskCardProps {
 // const dateFormat = "DD-MM-YYYY";
 
 const TaskCard: React.FC<TaskCardProps> = ({ card }) => {
-  const { setSelectedCard } = useContext(BoardTemplateContext);
+  const { setSelectedCardId } = useContext(BoardTemplateContext);
   const handleModalOpen = useModalStore((state) => state.handleModalOpen);
   const [isDragging, setIsDragging] = useState(false);
   const isExpiringToday = isToday(new Date(card.endDate), new Date());
@@ -38,17 +38,14 @@ const TaskCard: React.FC<TaskCardProps> = ({ card }) => {
       style={{
         opacity: isDragging ? "0.5" : "1",
       }}
-      className=" drag break-words max-w-[17rem] cursor-grab bg-[--color-grey-500-op-2] p-2 rounded-lg mr-1 relative"
+      onClick={() => {
+        handleModalOpen({ crateViewModal: true });
+        setSelectedCardId(card._id);
+      }}
+      className=" drag break-words max-w-[17rem]  cursor-pointer bg-[--color-grey-500-op-2] p-2 rounded-lg mr-1 relative"
     >
       <p className="mb-2  ">
         {card.name}
-        <EyeOutlined
-          className="text-xs ml-2 cursor-pointer"
-          onClick={() => {
-            handleModalOpen({ crateViewModal: true });
-            setSelectedCard(card);
-          }}
-        />
       </p>
 
       <div className="flex gap-2 items-center justify-between text-[0.6rem]">

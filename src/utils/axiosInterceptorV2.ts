@@ -24,7 +24,7 @@ export const request = ({ ...options }) => {
 
         if (err.response?.data.message?.includes("jwt expired") || err.response?.data.message?.includes("jwt malformed")) {
             localStorage.removeItem("TERAFE_TOKEN");
-            // window.location.replace('/')
+            window.location.replace('/')
             return Promise.reject({
                 message: "Please Login to get access",
             })
